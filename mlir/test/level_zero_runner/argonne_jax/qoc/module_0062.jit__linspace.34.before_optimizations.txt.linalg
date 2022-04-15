@@ -79,7 +79,7 @@ module @jit__linspace.34 {
     %c100 = arith.constant 100 : index
     %21 = linalg.init_tensor [100] : tensor<100xf64>
     %cst_8 = arith.constant 0.000000e+00 : f64
-    %22 = linalg.fill ins(%cst_8 : f64) outs(%21: tensor<100xf64>) -> tensor<100xf64> 
+    %22 = linalg.fill(%cst_8, %21) : f64, tensor<100xf64> -> tensor<100xf64> 
     %c0_9 = arith.constant 0 : index
     %c0_10 = arith.constant 0 : index
     %c99_11 = arith.constant 99 : index

@@ -1,0 +1,37 @@
+1. LOC:
+QOC 589 (18 files, smallest 6, largest 95)
+JANET 1465 (16 files, smallest 6, largest 616)
+
+2. New Operations
+QOC
+Arith.cmpi 9
+Arith.select 7
+Arith.sitofp 6
+math.sqrt 1
+tensor.pad 1
+//Tensor.collapse_shape 2
+tensor.extract 4
+Tensor.expand_shape 4
+Tensor.insert_slice 6
+tensor.yield 1
+linalg.matmul 1
+linalg.fill 8
+
+Janet
+Arith.cmpf 20
+Arith.cmpi 3
+Arith.select 22
+Arith.sitofp 6
+Math.log 4
+Math.powf 1
+Math.expm1 5    // exp(x) - 1
+Math.sqrt 1
+Linalg.matmul 6
+linalg.fill 12
+//Tensor.collapse_shape 2
+Tensor.expand_shape 5
+
+3. data type
+Gordon: f64
+QOC: i1, i32, i64, f64
+Janet: i1, i32, f32
