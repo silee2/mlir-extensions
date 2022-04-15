@@ -1,7 +1,0 @@
-module @jit_prim_fun.64 {
-  func @main(%arg0: tensor<400xf64>) -> tensor<200xf64> {
-    %0 = tensor.extract_slice %arg0[200] [200] [1] : tensor<400xf64> to tensor<200xf64>
-    return %0 : tensor<200xf64>
-  }
-}
-

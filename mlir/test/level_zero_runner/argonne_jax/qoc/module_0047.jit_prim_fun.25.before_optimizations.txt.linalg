@@ -1,6 +1,0 @@
-module @jit_prim_fun.25 {
-  func @main(%arg0: tensor<i64>) -> tensor<i64> {
-    return %arg0 : tensor<i64>
-  }
-}
-
