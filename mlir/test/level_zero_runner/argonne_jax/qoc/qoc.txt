@@ -1,0 +1,17 @@
+Qoc:
+18 : tensor.pad
+47 : works, empty function
+50 : works, matmul
+52 : works
+58 : works
+62 : lowering error assertion
+68 : works, but not lowered to gpu
+80 : works
+90 : works
+104 : lowering error assertion
+106 : lowering error assertion
+108 : works
+114 : works, but not lowered to gpu
+125 : lowering error assertion
+139 : lowering error assertion
+145 : unrealized_conversion_cast

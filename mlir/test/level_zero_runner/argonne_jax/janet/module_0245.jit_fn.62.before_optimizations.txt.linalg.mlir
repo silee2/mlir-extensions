@@ -17,9 +17,9 @@ module @jit_fn.62 {
   }
 
   func @main() {
-    %0 = arith.constant dense<1.000000e+00> : tensor<f32>
+    %0 = arith.constant dense<1.000000e+00> : tensor<13x13xf32>
     %1 = arith.constant dense<2.000000e+00> : tensor<f32>
-    %2 = call @foo(%0, %1) : (tensor<f32>, tensor<f32>) -> tensor<13x13xf32>
+    %2 = call @foo(%0, %1) : (tensor<13x13xf32>, tensor<f32>) -> tensor<13x13xf32>
     %unranked = tensor.cast %2 : tensor<13x13xf32> to tensor<*xf32>
     call @print_memref_f32(%unranked) : (tensor<*xf32>) -> ()
     return

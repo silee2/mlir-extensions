@@ -33,8 +33,7 @@ module @jit_prim_fun.11 {
   func @main() {
     %0 = arith.constant dense<1.000000e+00> : tensor<1x6xf32>
     %1 = arith.constant dense<2.000000e+00> : tensor<1x6xf32>
-    %3 = arith.constant dense<3.000000e+00> : tensor<2x6xf32>
-    %2 = call @foo(%0, %1, %3) : (tensor<1x6xf32>, tensor<1x6xf32>) -> tensor<2x6xf32>
+    %2 = call @foo(%0, %1) : (tensor<1x6xf32>, tensor<1x6xf32>) -> tensor<2x6xf32>
     %unranked = tensor.cast %2 : tensor<2x6xf32> to tensor<*xf32>
     call @print_memref_f32(%unranked) : (tensor<*xf32>) -> ()
     return

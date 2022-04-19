@@ -1,0 +1,17 @@
+Janet:
+00 : Not going to gpu, error: cannot be converted to LLVM IR: missing `LLVMTranslationDialectInterface` registration for dialect for op: math.log
+02 : works, but not lowered to gpu
+04 : lowering assertion
+09 : lowering assertion
+42 : error: Unhandled memref producer
+58 : error: Unhandled memref producer
+62 : works
+184 : error: Unhandled memref producer
+243 : no lowered to gpu, MLIR lacks i1 print function
+245 : works
+247 : works
+249 : works
+251 : works, empty function
+404 : works
+406 : works
+428 : works

@@ -13,7 +13,7 @@ module @jit_prim_fun.1 {
   func @main() {
     %0 = arith.constant dense<1> : tensor<i32>
     %1 = arith.constant dense<2> : tensor<i32>
-    %2 = call @foo(%0) : (tensor<i32>, tensor<i32>) -> tensor<i32>
+    %2 = call @foo(%0, %1) : (tensor<i32>, tensor<i32>) -> tensor<i32>
     %unranked = tensor.cast %2 : tensor<i32> to tensor<*xi32>
     call @print_memref_i32(%unranked) : (tensor<*xi32>) -> ()
     return

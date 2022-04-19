@@ -435,8 +435,8 @@ module @jit__net_loss.57 {
     %11 = arith.constant dense<3.000000e+00> : tensor<6xf32>
     %12 = arith.constant dense<3.000000e+00> : tensor<2x13xf32>
     %13 = arith.constant dense<3.000000e+00> : tensor<2x6xf32>
-    %14 = call @foo(%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13) : (tensor<13x13xf32>, tensor<13xf32>, tensor<13x32xf32>, tensor<32xf32>, tensor<32x16xf32>, tensor<16xf32>, tensor<16x8xf32>, tensor<8xf32>, tensor<8x4xf32>, tensor<4xf32>, tensor<4x6xf32>, tensor<6xf32>, tensor<2x13xf32>, tensor<2x6xf32>) -> tensor<f32>
-    %unranked = tensor.cast %2 : tensor<f32> to tensor<*xf32>
+    %14 = call @foo(%0, %1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13) : (tensor<13x13xf32>, tensor<13xf32>, tensor<13x32xf32>, tensor<32xf32>, tensor<32x16xf32>, tensor<16xf32>, tensor<16x8xf32>, tensor<8xf32>, tensor<8x4xf32>, tensor<4xf32>, tensor<4x6xf32>, tensor<6xf32>, tensor<2x13xf32>, tensor<2x6xf32>) -> tensor<f32>
+    %unranked = tensor.cast %14 : tensor<f32> to tensor<*xf32>
     call @print_memref_f32(%unranked) : (tensor<*xf32>) -> ()
     return
   }

@@ -616,7 +616,7 @@ module @jit__get_met_weights_singlegal.2 {
   func @main() {
     %0 = arith.constant dense<1.000000e+00> : tensor<f32>
     %1 = arith.constant dense<1.000000e+00> : tensor<f32>
-    %3 = arith.constant dense<1.000000e+00> : tensor<22xf32>
+    %3 = arith.constant dense<1.000000e+00> : tensor<23xf32>
     %2 = call @foo(%0, %1, %3) : (tensor<f32>, tensor<f32>, tensor<23xf32>) -> tensor<22xf32>
     %unranked = tensor.cast %2 : tensor<22xf32> to tensor<*xf32>
     call @print_memref_f32(%unranked) : (tensor<*xf32>) -> ()
