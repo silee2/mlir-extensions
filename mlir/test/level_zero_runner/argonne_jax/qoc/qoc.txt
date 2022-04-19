@@ -1,17 +1,17 @@
 Qoc:
-18 : tensor.pad
+18 : nested function call. tensor.pad cause issue
 47 : works, empty function
 50 : works, matmul
 52 : works
 58 : works
 62 : lowering error assertion
-68 : works, but not lowered to gpu
+68 : works, but not lowered to gpu  , iterator_types is not parallel (empty)
 80 : works
 90 : works
-104 : lowering error assertion
-106 : lowering error assertion
-108 : works
-114 : works, but not lowered to gpu
-125 : lowering error assertion
-139 : lowering error assertion
-145 : unrealized_conversion_cast
+104 : lowering error assertion, has complex type, extract real
+106 : lowering error assertion, has complex type. extract img
+108 : works, no linalg.generic
+114 : works, but not lowered to gpu, single tensor.extract_slice
+125 : lowering error assertion, has complex type, computes abs?
+139 : lowering error assertion, has complex type
+145 : unrealized_conversion_cast, has iterator_types redution,computes argmax

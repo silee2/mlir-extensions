@@ -1,17 +1,17 @@
 Janet:
-00 : Not going to gpu, error: cannot be converted to LLVM IR: missing `LLVMTranslationDialectInterface` registration for dialect for op: math.log
-02 : works, but not lowered to gpu
-04 : lowering assertion
-09 : lowering assertion
-42 : error: Unhandled memref producer
-58 : error: Unhandled memref producer
-62 : works
-184 : error: Unhandled memref producer
-243 : no lowered to gpu, MLIR lacks i1 print function
+00 : Not going to gpu, error: cannot be converted to LLVM IR: missing `LLVMTranslationDialectInterface` registration for dialect for op: math.log, iterator_types empty
+02 : works, but not lowered to gpu, iterator_types empty
+04 : lowering assertion, nested function calls,  has iteration_types reduction
+09 : lowering assertion, no linalg.generic
+42 : error: Unhandled memref producer, nested function calls, has iterator_types empty
+58 : error: Unhandled memref producer, nested function calls
+62 : works, no linalg.generic
+184 : error: Unhandled memref producer, nested function calls, has iterator_type reduction
+243 : no lowered to gpu, MLIR lacks i1 print function, has iterator_types empty
 245 : works
 247 : works
 249 : works
 251 : works, empty function
 404 : works
 406 : works
-428 : works
+428 : works, no linalg.generic
