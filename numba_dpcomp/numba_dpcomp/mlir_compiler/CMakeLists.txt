@@ -118,7 +118,7 @@ install(TARGETS dpcomp-runtime dpcomp-math-runtime dpcomp-python-runtime mlir_co
         )
 
 if(IMEX_ENABLE_IGPU_DIALECT)
-    install(TARGETS dpcomp-gpu-runtime
+    install(TARGETS igpu-runtime
             LIBRARY DESTINATION numba_dpcomp/numba_dpcomp
             )
 endif()

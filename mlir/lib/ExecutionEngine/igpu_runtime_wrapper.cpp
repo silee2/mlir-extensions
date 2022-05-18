@@ -22,7 +22,7 @@
 #include <tuple>
 #include <vector>
 
-#include "dpcomp-gpu-runtime_export.h"
+#include "igpu-runtime_export.h"
 
 #include "level_zero_printing.hpp"
 #include "level_zero_wrapper.hpp"
@@ -402,55 +402,55 @@ private:
 };
 } // namespace
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void
-dpcompGpuSetMemInfoAllocFunc(void *func) {
+extern "C" IGPU_RUNTIME_EXPORT void
+iGpuSetMemInfoAllocFunc(void *func) {
   LOG_FUNC();
   AllocFunc = reinterpret_cast<AllocFuncT>(func);
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void *
-dpcompGpuStreamCreate(size_t eventsCount) {
+extern "C" IGPU_RUNTIME_EXPORT void *
+iGpuStreamCreate(size_t eventsCount) {
   LOG_FUNC();
   return catchAll([&]() { return new Stream(eventsCount); });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void dpcompGpuStreamDestroy(void *stream) {
+extern "C" IGPU_RUNTIME_EXPORT void iGpuStreamDestroy(void *stream) {
   LOG_FUNC();
   catchAll([&]() { static_cast<Stream *>(stream)->release(); });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void *
-dpcompGpuModuleLoad(void *stream, const void *data, size_t dataSize) {
+extern "C" IGPU_RUNTIME_EXPORT void *
+iGpuModuleLoad(void *stream, const void *data, size_t dataSize) {
   LOG_FUNC();
   return catchAll([&]() {
     return static_cast<Stream *>(stream)->loadModule(data, dataSize);
   });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void dpcompGpuModuleDestroy(void *module) {
+extern "C" IGPU_RUNTIME_EXPORT void iGpuModuleDestroy(void *module) {
   LOG_FUNC();
   catchAll([&]() {
     Stream::destroyModule(static_cast<ze_module_handle_t>(module));
   });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void *
-dpcompGpuKernelGet(void *module, const char *name) {
+extern "C" IGPU_RUNTIME_EXPORT void *
+iGpuKernelGet(void *module, const char *name) {
   LOG_FUNC();
   return catchAll([&]() {
     return Stream::getKernel(static_cast<ze_module_handle_t>(module), name);
   });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void dpcompGpuKernelDestroy(void *kernel) {
+extern "C" IGPU_RUNTIME_EXPORT void iGpuKernelDestroy(void *kernel) {
   LOG_FUNC();
   catchAll([&]() {
     Stream::destroyKernel(static_cast<ze_kernel_handle_t>(kernel));
   });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void *
-dpcompGpuLaunchKernel(void *stream, void *kernel, size_t gridX, size_t gridY,
+extern "C" IGPU_RUNTIME_EXPORT void *
+iGpuLaunchKernel(void *stream, void *kernel, size_t gridX, size_t gridY,
                       size_t gridZ, size_t blockX, size_t blockY, size_t blockZ,
                       void *events, void *params, size_t eventIndex) {
   LOG_FUNC();
@@ -462,7 +462,7 @@ dpcompGpuLaunchKernel(void *stream, void *kernel, size_t gridX, size_t gridY,
   });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void dpcompGpuWait(void *event) {
+extern "C" IGPU_RUNTIME_EXPORT void iGpuWait(void *event) {
   LOG_FUNC();
   catchAll([&]() { Stream::waitEvent(static_cast<ze_event_handle_t>(event)); });
 }
@@ -473,8 +473,8 @@ struct AllocResult {
   void *event;
 };
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void
-dpcompGpuAlloc(void *stream, size_t size, size_t alignment, int shared,
+extern "C" IGPU_RUNTIME_EXPORT void
+iGpuAlloc(void *stream, size_t size, size_t alignment, int shared,
                void *events, size_t eventIndex, AllocResult *ret) {
   LOG_FUNC();
   catchAll([&]() {
@@ -485,14 +485,14 @@ dpcompGpuAlloc(void *stream, size_t size, size_t alignment, int shared,
   });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void dpcompGpuDeAlloc(void *stream,
+extern "C" IGPU_RUNTIME_EXPORT void iGpuDeAlloc(void *stream,
                                                            void *ptr) {
   LOG_FUNC();
   catchAll([&]() { static_cast<Stream *>(stream)->deallocBuffer(ptr); });
 }
 
-extern "C" DPCOMP_GPU_RUNTIME_EXPORT void
-dpcompGpuSuggestBlockSize(void *stream, void *kernel, const uint32_t *gridSize,
+extern "C" IGPU_RUNTIME_EXPORT void
+iGpuSuggestBlockSize(void *stream, void *kernel, const uint32_t *gridSize,
                           uint32_t *blockSize, size_t numDims) {
   LOG_FUNC();
   catchAll([&]() {

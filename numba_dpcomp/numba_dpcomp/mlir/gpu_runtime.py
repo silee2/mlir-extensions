@@ -20,7 +20,7 @@ from .utils import load_lib, mlir_func_name, register_cfunc
 from numba.core.runtime import _nrt_python as _nrt
 
 try:
-    runtime_lib = load_lib("dpcomp-gpu-runtime")
+    runtime_lib = load_lib("igpu-runtime")
     IS_GPU_RUNTIME_AVAILABLE = True
 except:
     IS_GPU_RUNTIME_AVAILABLE = False
@@ -31,16 +31,16 @@ if IS_GPU_RUNTIME_AVAILABLE:
 
     def _register_funcs():
         _funcs = [
-            "dpcompGpuStreamCreate",
-            "dpcompGpuStreamDestroy",
-            "dpcompGpuModuleLoad",
-            "dpcompGpuModuleDestroy",
-            "dpcompGpuKernelGet",
-            "dpcompGpuKernelDestroy",
-            "dpcompGpuLaunchKernel",
-            "dpcompGpuSuggestBlockSize",
-            "dpcompGpuWait",
-            "dpcompGpuAlloc",
+            "iGpuStreamCreate",
+            "iGpuStreamDestroy",
+            "iGpuModuleLoad",
+            "iGpuModuleDestroy",
+            "iGpuKernelGet",
+            "iGpuKernelDestroy",
+            "iGpuLaunchKernel",
+            "iGpuSuggestBlockSize",
+            "iGpuWait",
+            "iGpuAlloc",
             mlir_func_name("get_global_id"),
             mlir_func_name("get_local_id"),
             mlir_func_name("get_global_size"),
@@ -66,7 +66,7 @@ if IS_GPU_RUNTIME_AVAILABLE:
                 func = 1
             register_cfunc(ll, name, func)
 
-        _alloc_func = runtime_lib.dpcompGpuSetMemInfoAllocFunc
+        _alloc_func = runtime_lib.iGpuSetMemInfoAllocFunc
         _alloc_func.argtypes = [ctypes.c_void_p]
         _alloc_func(get_alloc_func())
 
