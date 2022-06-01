@@ -1,10 +1,10 @@
 // map for original linalg.generic
 #map0 = affine_map<(d0) -> (d0)>
 #map1 = affine_map<(d0) -> ()>
-// First linalg.generic: prepend index to input map and output map
+// First linalg.generic: prepend index to input map and output map for both ins and outs
 #map2 = affine_map<(d1, d0) -> (d1, d0)>
 #map3 = affine_map<(d1, d0) -> (d1)>
-// Second linalg.generic: prepend index to input map
+// Second linalg.generic: prepend index to input map for both ins and outs. prepend index to output map for ins only
 #map4 = affine_map<(d1, d0) -> (d1, d0)>
 #map5 = affine_map<(d1, d0) -> ()>
 module @jit__argmax.79 {
