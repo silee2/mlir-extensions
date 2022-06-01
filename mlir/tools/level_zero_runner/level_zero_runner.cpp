@@ -24,6 +24,7 @@
 #include "mlir/Dialect/LLVMIR/LLVMDialect.h"
 #include "mlir/Dialect/MemRef/IR/MemRef.h"
 #include "mlir/Dialect/MemRef/Transforms/Passes.h"
+#include "mlir/Dialect/SCF/SCF.h"
 #include "mlir/Dialect/SPIRV/IR/SPIRVDialect.h"
 #include "mlir/Dialect/SPIRV/IR/SPIRVOps.h"
 #include "mlir/Dialect/SPIRV/Transforms/Passes.h"
@@ -38,6 +39,7 @@
 #include <mlir/InitAllDialects.h>
 #include <mlir/InitAllPasses.h>
 
+#include "mlir-extensions/dialect/plier_util/dialect.hpp"
 #include "mlir-extensions/Conversion/gpu_runtime_to_llvm.hpp"
 #include "mlir-extensions/Conversion/gpu_to_gpu_runtime.hpp"
 
@@ -112,7 +114,8 @@ int main(int argc, char **argv) {
   registry.insert<mlir::arith::ArithmeticDialect, mlir::LLVM::LLVMDialect,
                   mlir::gpu::GPUDialect, mlir::spirv::SPIRVDialect,
                   mlir::func::FuncDialect, mlir::memref::MemRefDialect,
-                  mlir::linalg::LinalgDialect, mlir::tensor::TensorDialect>();
+                  mlir::linalg::LinalgDialect, mlir::tensor::TensorDialect,
+                  mlir::scf::SCFDialect, plier::PlierUtilDialect>();
   mlir::registerLLVMDialectTranslation(registry);
 
   return mlir::JitRunnerMain(argc, argv, registry, jitRunnerConfig);

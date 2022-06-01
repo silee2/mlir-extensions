@@ -27,6 +27,7 @@
 #include <mlir/Conversion/VectorToSPIRV/VectorToSPIRV.h>
 #include <mlir/Conversion/TensorToSPIRV/TensorToSPIRV.h>
 #include <mlir/Conversion/LinalgToSPIRV/LinalgToSPIRV.h>
+#include <mlir/Conversion/MemRefToSPIRV/MemRefToSPIRV.h>
 #include <mlir/Dialect/Affine/IR/AffineOps.h>
 #include <mlir/Dialect/ControlFlow/IR/ControlFlowOps.h>
 #include <mlir/Dialect/Func/IR/FuncOps.h>
@@ -1161,6 +1162,8 @@ struct GPUToSpirvPass
                 ConvertStoreOp, ConvertAtomicOps, ConvertFunc, ConvertAssert,
                 ConvertBarrierOp, ConvertMemFenceOp, ConvertUndef,
                 ConvertGlobalOp, ConvertGetGlobalOp>(typeConverter, context);
+
+    mlir::populateMemRefToSPIRVPatterns(typeConverter, patterns);
 
     if (failed(
             applyFullConversion(kernelModules, *target, std::move(patterns))))
