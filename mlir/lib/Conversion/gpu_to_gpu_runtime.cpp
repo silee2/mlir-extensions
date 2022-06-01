@@ -24,6 +24,9 @@
 #include <mlir/Conversion/GPUToSPIRV/GPUToSPIRV.h>
 #include <mlir/Conversion/MathToSPIRV/MathToSPIRV.h>
 #include <mlir/Conversion/SCFToSPIRV/SCFToSPIRV.h>
+#include <mlir/Conversion/VectorToSPIRV/VectorToSPIRV.h>
+#include <mlir/Conversion/TensorToSPIRV/TensorToSPIRV.h>
+#include <mlir/Conversion/LinalgToSPIRV/LinalgToSPIRV.h>
 #include <mlir/Dialect/Affine/IR/AffineOps.h>
 #include <mlir/Dialect/ControlFlow/IR/ControlFlowOps.h>
 #include <mlir/Dialect/Func/IR/FuncOps.h>
@@ -1146,6 +1149,11 @@ struct GPUToSpirvPass
     mlir::cf::populateControlFlowToSPIRVPatterns(typeConverter, patterns);
     mlir::arith::populateArithmeticToSPIRVPatterns(typeConverter, patterns);
     mlir::populateMathToSPIRVPatterns(typeConverter, patterns);
+    // More patterns by silee2
+    mlir::populateVectorToSPIRVPatterns(typeConverter, patterns);
+    mlir::populateBuiltinFuncToSPIRVPatterns(typeConverter, patterns);
+    mlir::populateTensorToSPIRVPatterns(typeConverter, 64, patterns);
+    mlir::populateLinalgToSPIRVPatterns(typeConverter, patterns);
 
     patterns
         .insert<ConvertSubviewOp, ConvertCastOp<mlir::memref::CastOp>,
