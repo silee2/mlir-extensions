@@ -8,11 +8,11 @@
 #map4 = affine_map<(d1, d0) -> (d1, d0)>
 #map5 = affine_map<(d1, d0) -> ()>
 module @jit__argmax.79 {
-  func @foo(%arg0: tensor<100xi1>) -> tensor<i64> {
+  func.func @foo(%arg0: tensor<100xi1>) -> tensor<i64> {
     %0 = call @argmax.15(%arg0) : (tensor<100xi1>) -> tensor<i64>
     return %0 : tensor<i64>
   }
-  func private @argmax.15(%arg0: tensor<100xi1>) -> tensor<i64> {
+  func.func private @argmax.15(%arg0: tensor<100xi1>) -> tensor<i64> {
     %cst = arith.constant dense<false> : tensor<i1>
     %cst_0 = arith.constant dense<0> : tensor<i64>
     %0 = linalg.init_tensor [100] : tensor<100xi64>
@@ -24,10 +24,10 @@ module @jit__argmax.79 {
     } -> tensor<100xi64>
     %false = arith.constant false
     %2 = linalg.init_tensor [] : tensor<i1>
-    %3 = linalg.fill(%false, %2) : i1, tensor<i1> -> tensor<i1>
+    %3 = linalg.fill ins(%false : i1) outs(%2 : tensor<i1>) -> tensor<i1>
     %c0_i64 = arith.constant 0 : i64
     %4 = linalg.init_tensor [] : tensor<i64>
-    %5 = linalg.fill(%c0_i64, %4) : i64, tensor<i64> -> tensor<i64>
+    %5 = linalg.fill ins(%c0_i64 : i64) outs(%4 : tensor<i64>) -> tensor<i64>
     // start of modification
 
     // original linalg.generic
@@ -62,8 +62,8 @@ module @jit__argmax.79 {
     %e2 = tensor.extract %5[] : tensor<i64>
     %u1 = linalg.init_tensor [10] : tensor<10xi1>
     %u2 = linalg.init_tensor [10] : tensor<10xi64>
-    %t1 = linalg.fill(%e1, %u1) : i1, tensor<10xi1> -> tensor<10xi1>
-    %t2 = linalg.fill(%e2, %u2) : i64, tensor<10xi64> -> tensor<10xi64>
+    %t1 = linalg.fill ins(%e1 : i1) outs(%u1 : tensor<10xi1>) -> tensor<10xi1>
+    %t2 = linalg.fill ins(%e2 : i64) outs(%u2 : tensor<10xi64>) -> tensor<10xi64>
     %r1:2 = linalg.generic {indexing_maps = [#map2, #map2, #map3, #map3], iterator_types = ["parallel", "reduction"]} ins(%in1, %in2 : tensor<10x10xi1>, tensor<10x10xi64>) outs(%t1, %t2 : tensor<10xi1>, tensor<10xi64>) {
     ^bb0(%arg1: i1, %arg2: i64, %arg3: i1, %arg4: i64):
       %7 = arith.cmpi sgt, %arg1, %arg3 : i1
@@ -97,14 +97,14 @@ module @jit__argmax.79 {
     return %6#1 : tensor<i64>
   }
 
-  func @main() {
+  func.func @main() {
     %0 = arith.constant dense<[0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]> : tensor<100xi1>
     %2 = call @foo(%0) : (tensor<100xi1>) -> tensor<i64>
     %unranked = tensor.cast %2 : tensor<i64> to tensor<*xi64>
-    call @print_memref_i64(%unranked) : (tensor<*xi64>) -> ()
+    call @printMemrefI64(%unranked) : (tensor<*xi64>) -> ()
     return
   }
 
-  func private @print_memref_i64(%ptr : tensor<*xi64>)
+  func.func private @printMemrefI64(%ptr : tensor<*xi64>)
 }
 
