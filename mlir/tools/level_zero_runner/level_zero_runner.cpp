@@ -39,7 +39,7 @@
 #include <mlir/InitAllDialects.h>
 #include <mlir/InitAllPasses.h>
 
-#include "mlir-extensions/dialect/plier_util/dialect.hpp"
+#include "mlir-extensions/Dialect/plier_util/dialect.hpp"
 #include "mlir-extensions/Conversion/gpu_runtime_to_llvm.hpp"
 #include "mlir-extensions/Conversion/gpu_to_gpu_runtime.hpp"
 
