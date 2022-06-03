@@ -784,21 +784,30 @@ public:
                   mlir::memref::StoreOp::Adaptor adaptor,
                   mlir::ConversionPatternRewriter &rewriter) const override {
     auto memrefType = op.memref().getType().cast<mlir::MemRefType>();
-    if (!memrefType.hasRank() || memrefType.getRank() != 1)
-      return mlir::failure();
+    if (memrefType.getRank() == 0) {
+      auto memoryAccess = mlir::spirv::MemoryAccessAttr::get(
+          op.getContext(), mlir::spirv::MemoryAccess::Aligned);
+      auto alignment =
+          rewriter.getI32IntegerAttr(memrefType.getElementTypeBitWidth() / 8);
+      rewriter.replaceOpWithNewOp<mlir::spirv::StoreOp>(op, adaptor.memref(), adaptor.value(),
+                                                       memoryAccess, alignment);
+      return mlir::success();
+    } else if (memrefType.hasRank() && memrefType.getRank() == 1) {
+      auto loc = op.getLoc();
+      auto ptr = rewriter.create<mlir::spirv::InBoundsPtrAccessChainOp>(
+          loc, adaptor.memref(), adaptor.indices().front(), llvm::None);
 
-    auto loc = op.getLoc();
-    auto ptr = rewriter.create<mlir::spirv::InBoundsPtrAccessChainOp>(
-        loc, adaptor.memref(), adaptor.indices().front(), llvm::None);
-
-    auto memoryAccess = mlir::spirv::MemoryAccessAttr::get(
-        op.getContext(), mlir::spirv::MemoryAccess::Aligned);
-    auto alignment =
-        rewriter.getI32IntegerAttr(memrefType.getElementTypeBitWidth() / 8);
-    rewriter.replaceOpWithNewOp<mlir::spirv::StoreOp>(op, ptr, adaptor.value(),
+      auto memoryAccess = mlir::spirv::MemoryAccessAttr::get(
+          op.getContext(), mlir::spirv::MemoryAccess::Aligned);
+      auto alignment =
+          rewriter.getI32IntegerAttr(memrefType.getElementTypeBitWidth() / 8);
+      rewriter.replaceOpWithNewOp<mlir::spirv::StoreOp>(op, ptr, adaptor.value(),
                                                       memoryAccess, alignment);
 
-    return mlir::success();
+      return mlir::success();
+    } else {
+      return mlir::failure();
+    }
   }
 };
 
@@ -1151,10 +1160,12 @@ struct GPUToSpirvPass
     mlir::arith::populateArithmeticToSPIRVPatterns(typeConverter, patterns);
     mlir::populateMathToSPIRVPatterns(typeConverter, patterns);
     // More patterns by silee2
-    mlir::populateVectorToSPIRVPatterns(typeConverter, patterns);
-    mlir::populateBuiltinFuncToSPIRVPatterns(typeConverter, patterns);
-    mlir::populateTensorToSPIRVPatterns(typeConverter, 64, patterns);
-    mlir::populateLinalgToSPIRVPatterns(typeConverter, patterns);
+//    mlir::populateVectorToSPIRVPatterns(typeConverter, patterns);
+//    mlir::populateBuiltinFuncToSPIRVPatterns(typeConverter, patterns);
+//    mlir::populateTensorToSPIRVPatterns(typeConverter, 64, patterns);
+//    mlir::populateLinalgToSPIRVPatterns(typeConverter, patterns);
+
+//    mlir::populateMemRefToSPIRVPatterns(typeConverter, patterns);
 
     patterns
         .insert<ConvertSubviewOp, ConvertCastOp<mlir::memref::CastOp>,
@@ -1162,8 +1173,6 @@ struct GPUToSpirvPass
                 ConvertStoreOp, ConvertAtomicOps, ConvertFunc, ConvertAssert,
                 ConvertBarrierOp, ConvertMemFenceOp, ConvertUndef,
                 ConvertGlobalOp, ConvertGetGlobalOp>(typeConverter, context);
-
-    mlir::populateMemRefToSPIRVPatterns(typeConverter, patterns);
 
     if (failed(
             applyFullConversion(kernelModules, *target, std::move(patterns))))
