@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-project(level_zero_runner LANGUAGES CXX C)
+project(level_zero_runner LANGUAGES CXX)
 
-find_package(LLVM REQUIRED CONFIG)
 find_package(MLIR REQUIRED CONFIG)
 
 list(APPEND CMAKE_MODULE_PATH "${MLIR_CMAKE_DIR}")
@@ -22,6 +21,9 @@ list(APPEND CMAKE_MODULE_PATH "${LLVM_CMAKE_DIR}")
 include(AddLLVM)
 include(AddMLIR)
 include(HandleLLVMOptions)
+
+link_directories(${LLVM_BUILD_LIBRARY_DIR})
+add_definitions(${LLVM_DEFINITIONS})
 
 get_property(dialect_libs GLOBAL PROPERTY MLIR_DIALECT_LIBS)
 get_property(conversion_libs GLOBAL PROPERTY MLIR_CONVERSION_LIBS)
@@ -32,9 +34,9 @@ set(SOURCES_LIST
 set(HEADERS_LIST
     )
 
-add_executable(${PROJECT_NAME} ${SOURCES_LIST} ${HEADERS_LIST})
+add_llvm_tool(${PROJECT_NAME} ${SOURCES_LIST} ${HEADERS_LIST})
 
-apply_llvm_compile_flags(${PROJECT_NAME})
+llvm_update_compile_flags(${PROJECT_NAME})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     mlir-extensions
@@ -68,8 +70,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${LLVM_INCLUDE_DIRS}
     ${MLIR_INCLUDE_DIRS}
     )
-
-set(CMAKE_INSTALL_BINDIR ${CMAKE_SOURCE_DIR}/build/level_zero_runner)
 
 install(TARGETS level_zero_runner
         PERMISSIONS OWNER_WRITE OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
