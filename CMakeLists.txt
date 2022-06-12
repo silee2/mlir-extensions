@@ -105,7 +105,7 @@ message(STATUS "IMEX_ENABLE_TBB_SUPPORT ${IMEX_ENABLE_TBB_SUPPORT}")
 
 macro(apply_llvm_compile_flags target)
     if (MSVC)
-        target_compile_options(${target} PRIVATE /EHsc)
+	    #target_compile_options(${target} PRIVATE /EHsc)
     endif ()
     target_compile_definitions(${target} PRIVATE ${LLVM_DEFINITIONS})
 endmacro()
