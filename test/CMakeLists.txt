@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-find_package(LLVM REQUIRED CONFIG)
+find_package(MLIR REQUIRED CONFIG)
 
 configure_file(lit.site.cfg.py.in lit.site.cfg.py)
 configure_file(runlit.py runlit.py COPYONLY)
