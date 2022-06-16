@@ -13,4 +13,3 @@
 # limitations under the License.
 
 add_subdirectory(dpcomp-opt)
-add_subdirectory(FileCheck)
