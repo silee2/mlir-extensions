@@ -45,71 +45,71 @@ if (IMEX_ENABLE_IGPU_DIALECT)
 endif()
 
 set(SOURCES_LIST
-    lib/Conversion/SCFToAffine/SCFToAffine.cpp
+    #lib/Conversion/SCFToAffine/SCFToAffine.cpp
     lib/Conversion/gpu_to_gpu_runtime.cpp
     lib/Conversion/gpu_runtime_to_llvm.cpp
-    lib/analysis/memory_ssa.cpp
-    lib/analysis/memory_ssa_analysis.cpp
-    lib/compiler/compiler.cpp
-    lib/compiler/pipeline_registry.cpp
+    #lib/analysis/memory_ssa.cpp
+    #lib/analysis/memory_ssa_analysis.cpp
+    #lib/compiler/compiler.cpp
+    #lib/compiler/pipeline_registry.cpp
     lib/Dialect/gpu_runtime/IR/gpu_runtime_ops.cpp
     lib/Dialect/plier/dialect.cpp
     lib/Dialect/plier_util/dialect.cpp
-    lib/Transforms/arg_lowering.cpp
-    lib/Transforms/call_lowering.cpp
-    lib/Transforms/canonicalize_reductions.cpp
-    lib/Transforms/cast_lowering.cpp
-    lib/Transforms/cast_utils.cpp
-    lib/Transforms/common_opts.cpp
-    lib/Transforms/const_utils.cpp
-    lib/Transforms/cse.cpp
+    #lib/Transforms/arg_lowering.cpp
+    #lib/Transforms/call_lowering.cpp
+    #lib/Transforms/canonicalize_reductions.cpp
+    #lib/Transforms/cast_lowering.cpp
+    #lib/Transforms/cast_utils.cpp
+    #lib/Transforms/common_opts.cpp
+    #lib/Transforms/const_utils.cpp
+    #lib/Transforms/cse.cpp
     lib/Transforms/func_utils.cpp
-    lib/Transforms/if_rewrites.cpp
-    lib/Transforms/index_type_propagation.cpp
-    lib/Transforms/inline_utils.cpp
-    lib/Transforms/loop_rewrites.cpp
-    lib/Transforms/loop_utils.cpp
-    lib/Transforms/memory_rewrites.cpp
-    lib/Transforms/pipeline_utils.cpp
-    lib/Transforms/promote_bool_memref.cpp
-    lib/Transforms/promote_to_parallel.cpp
-    lib/Transforms/type_conversion.cpp
-    lib/Transforms/uplift_math.cpp
-    lib/utils.cpp
+    #lib/Transforms/if_rewrites.cpp
+    #lib/Transforms/index_type_propagation.cpp
+    #lib/Transforms/inline_utils.cpp
+    #lib/Transforms/loop_rewrites.cpp
+    #lib/Transforms/loop_utils.cpp
+    #lib/Transforms/memory_rewrites.cpp
+    #lib/Transforms/pipeline_utils.cpp
+    #lib/Transforms/promote_bool_memref.cpp
+    #lib/Transforms/promote_to_parallel.cpp
+    #lib/Transforms/type_conversion.cpp
+    #lib/Transforms/uplift_math.cpp
+    #lib/utils.cpp
     )
 set(HEADERS_LIST
-    include/mlir-extensions/Conversion/SCFToAffine/SCFToAffine.h
+    #include/mlir-extensions/Conversion/SCFToAffine/SCFToAffine.h
     include/mlir-extensions/Conversion/gpu_to_gpu_runtime.hpp
     include/mlir-extensions/Conversion/gpu_runtime_to_llvm.hpp
-    include/mlir-extensions/analysis/memory_ssa.hpp
-    include/mlir-extensions/analysis/memory_ssa_analysis.hpp
-    include/mlir-extensions/compiler/compiler.hpp
-    include/mlir-extensions/compiler/pipeline_registry.hpp
+    #include/mlir-extensions/analysis/memory_ssa.hpp
+    #include/mlir-extensions/analysis/memory_ssa_analysis.hpp
+    #include/mlir-extensions/compiler/compiler.hpp
+    #include/mlir-extensions/compiler/pipeline_registry.hpp
     include/mlir-extensions/Dialect/gpu_runtime/IR/gpu_runtime_ops.hpp
     include/mlir-extensions/Dialect/plier/dialect.hpp
     include/mlir-extensions/Dialect/plier_util/dialect.hpp
-    include/mlir-extensions/Transforms/arg_lowering.hpp
-    include/mlir-extensions/Transforms/call_lowering.hpp
-    include/mlir-extensions/Transforms/canonicalize_reductions.hpp
-    include/mlir-extensions/Transforms/cast_lowering.hpp
-    include/mlir-extensions/Transforms/cast_utils.hpp
-    include/mlir-extensions/Transforms/common_opts.hpp
-    include/mlir-extensions/Transforms/const_utils.hpp
-    include/mlir-extensions/Transforms/cse.hpp
-    include/mlir-extensions/Transforms/func_utils.hpp
-    include/mlir-extensions/Transforms/if_rewrites.hpp
-    include/mlir-extensions/Transforms/index_type_propagation.hpp
-    include/mlir-extensions/Transforms/inline_utils.hpp
-    include/mlir-extensions/Transforms/loop_rewrites.hpp
-    include/mlir-extensions/Transforms/loop_utils.hpp
-    include/mlir-extensions/Transforms/memory_rewrites.hpp
-    include/mlir-extensions/Transforms/pipeline_utils.hpp
-    include/mlir-extensions/Transforms/promote_bool_memref.hpp
-    include/mlir-extensions/Transforms/promote_to_parallel.hpp
-    include/mlir-extensions/Transforms/rewrite_wrapper.hpp
-    include/mlir-extensions/Transforms/type_conversion.hpp
-    include/mlir-extensions/Transforms/uplift_math.hpp
-    include/mlir-extensions/utils.hpp
+    #include/mlir-extensions/Transforms/arg_lowering.hpp
+    #include/mlir-extensions/Transforms/call_lowering.hpp
+    #include/mlir-extensions/Transforms/canonicalize_reductions.hpp
+    #include/mlir-extensions/Transforms/cast_lowering.hpp
+    #include/mlir-extensions/Transforms/cast_utils.hpp
+    #include/mlir-extensions/Transforms/common_opts.hpp
+    #include/mlir-extensions/Transforms/const_utils.hpp
+    #include/mlir-extensions/Transforms/cse.hpp
+    #include/mlir-extensions/Transforms/func_utils.hpp
+    #include/mlir-extensions/Transforms/if_rewrites.hpp
+    #include/mlir-extensions/Transforms/index_type_propagation.hpp
+    #include/mlir-extensions/Transforms/inline_utils.hpp
+    #include/mlir-extensions/Transforms/loop_rewrites.hpp
+    #include/mlir-extensions/Transforms/loop_utils.hpp
+    #include/mlir-extensions/Transforms/memory_rewrites.hpp
+    #include/mlir-extensions/Transforms/pipeline_utils.hpp
+    #include/mlir-extensions/Transforms/promote_bool_memref.hpp
+    #include/mlir-extensions/Transforms/promote_to_parallel.hpp
+    #include/mlir-extensions/Transforms/rewrite_wrapper.hpp
+    #include/mlir-extensions/Transforms/type_conversion.hpp
+    #include/mlir-extensions/Transforms/uplift_math.hpp
+    #include/mlir-extensions/utils.hpp
     )
 
 set(MLIR_EXTENSIONS_LIB "mlir-extensions")
@@ -118,16 +118,16 @@ add_library(${MLIR_EXTENSIONS_LIB} STATIC ${SOURCES_LIST} ${HEADERS_LIST})
 
 apply_llvm_compile_flags(${MLIR_EXTENSIONS_LIB})
 
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG(-Winvalid-offsetof __offsetof_flag)
-if (__offsetof_flag)
-    set_source_files_properties(
-        lib/analysis/memory_ssa.cpp
-        PROPERTIES
-        COMPILE_FLAGS "-Wno-invalid-offsetof"
-    )
-endif()
-unset(__offsetof_flag)
+#include(CheckCXXCompilerFlag)
+#CHECK_CXX_COMPILER_FLAG(-Winvalid-offsetof __offsetof_flag)
+#if (__offsetof_flag)
+#    set_source_files_properties(
+#        lib/analysis/memory_ssa.cpp
+#        PROPERTIES
+#        COMPILE_FLAGS "-Wno-invalid-offsetof"
+#    )
+#endif()
+#unset(__offsetof_flag)
 
 target_link_libraries(${MLIR_EXTENSIONS_LIB} PRIVATE
     MLIRIR
@@ -152,4 +152,7 @@ target_include_directories(${MLIR_EXTENSIONS_LIB} PUBLIC
     ${PROJECT_BINARY_DIR}/mlir-extensions/include
     )
 
-add_dependencies(${MLIR_EXTENSIONS_LIB} MLIRPlierOpsIncGen MLIRPlierUtilOpsIncGen MLIRGpuRuntimeOpsIncGen)
+add_dependencies(${MLIR_EXTENSIONS_LIB} 
+    MLIRPlierOpsIncGen 
+    MLIRPlierUtilOpsIncGen
+    MLIRGpuRuntimeOpsIncGen)
