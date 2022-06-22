@@ -384,7 +384,7 @@ def _build_imex(
             "-DCMAKE_PREFIX_PATH=" + os.path.abspath(llvm_install_dir),
             "-DCMAKE_INSTALL_PREFIX=" + os.path.abspath(imex_install_prefix),
             "-DIMEX_USE_DPNP=" + "ON" if enable_dpnp else "OFF",
-            "-DIMEX_ENABLE_IGPU_DIALECT=" + "ON" if enable_igpu else "OFF",
+            "-DIMEX_ENABLE_IGPU_RUNNER=" + "ON" if enable_igpu else "OFF",
             "-DIMEX_ENABLE_TESTS=" + "ON" if enable_tests else "OFF",
             "-DIMEX_ENABLE_NUMBA_FE=" + "ON" if enable_numba_fe else "OFF",
             "-DIMEX_ENABLE_NUMBA_HOTFIX=" + "ON" if enable_numba_hotfix else "OFF",

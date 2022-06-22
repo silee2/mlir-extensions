@@ -711,7 +711,7 @@ static void createPipeline(plier::PipelineRegistry &registry,
   registerParallelToTBBPipeline(registry);
 
   if (settings.enableGpuPipeline) {
-#ifdef IMEX_ENABLE_IGPU_DIALECT
+#ifdef IMEX_ENABLE_IGPU_RUNNER
     registerLowerToGPUPipeline(registry);
     // TODO(nbpatel): Add Gpu->GpuRuntime & GpuRuntimetoLlvm Transformation
 #else

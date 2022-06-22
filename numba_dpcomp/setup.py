@@ -90,7 +90,7 @@ if int(os.environ.get("DPCOMP_SETUP_RUN_CMAKE", 1)):
     else:
         print("LEVEL_ZERO_DIR is", LEVEL_ZERO_DIR)
         cmake_cmd += [
-            "-DIMEX_ENABLE_IGPU_DIALECT=ON",
+            "-DIMEX_ENABLE_IGPU_RUNNER=ON",
         ]
 
     try:

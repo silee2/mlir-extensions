@@ -104,8 +104,8 @@ if(IMEX_USE_DPNP)
     target_compile_definitions(${PROJECT_NAME} PRIVATE IMEX_USE_DPNP=1)
 endif()
 
-if(IMEX_ENABLE_IGPU_DIALECT)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE IMEX_ENABLE_IGPU_DIALECT=1)
+if(IMEX_ENABLE_IGPU_RUNNER)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE IMEX_ENABLE_IGPU_RUNNER=1)
 endif()
 
 set(CMAKE_INSTALL_BINDIR ./numba_dpcomp/numba_dpcomp)
@@ -116,7 +116,7 @@ install(TARGETS dpcomp-runtime dpcomp-math-runtime dpcomp-python-runtime mlir_co
         LIBRARY DESTINATION numba_dpcomp/numba_dpcomp
         )
 
-if(IMEX_ENABLE_IGPU_DIALECT)
+if(IMEX_ENABLE_IGPU_RUNNER)
     install(TARGETS dpcomp-gpu-runtime
             LIBRARY DESTINATION numba_dpcomp/numba_dpcomp
             )

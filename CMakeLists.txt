@@ -40,7 +40,7 @@ macro(apply_llvm_compile_flags target)
     target_compile_definitions(${target} PRIVATE ${LLVM_DEFINITIONS})
 endmacro()
 
-if(IMEX_ENABLE_IGPU_DIALECT)
+if(IMEX_ENABLE_IGPU_RUNNER)
     if(DEFINED ENV{LEVEL_ZERO_VERSION_CHECK_OFF})
         find_package(LevelZero REQUIRED)
     else()

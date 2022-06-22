@@ -40,7 +40,7 @@ add_subdirectory(include/mlir-extensions/Dialect/plier)
 add_subdirectory(include/mlir-extensions/Dialect/plier_util)
 add_subdirectory(include/mlir-extensions/Dialect/gpu_runtime/IR)
 
-if (IMEX_ENABLE_IGPU_DIALECT)
+if (IMEX_ENABLE_IGPU_RUNNER)
     add_subdirectory(tools)
 endif()
 
