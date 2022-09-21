@@ -1,6 +1,4 @@
-add_custom_target(imex-runner-pps
-                  COMMAND mkdir -p imex-runner
-                  COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/imex-runner/*.pp imex-runner/)
+configure_file(imex-runner/ptensor.pp imex-runner/ptensor.pp COPYONLY)
 
 configure_lit_site_cfg(
         ${CMAKE_CURRENT_SOURCE_DIR}/lit.site.cfg.py.in
@@ -9,12 +7,14 @@ configure_lit_site_cfg(
         ${CMAKE_CURRENT_SOURCE_DIR}/lit.cfg.py
 )
 
-set(MLIR_RUNNER_UTILS_DIR ${LLVM_LIBRARY_DIR})
+if(WIN32)
+    set(MLIR_RUNNER_UTILS_DIR ${LLVM_BINARY_DIR}/bin)
+else()
+    set(MLIR_RUNNER_UTILS_DIR ${LLVM_LIBRARY_DIR})
+endif()
 set(IMEX_TEST_DEPENDS
         FileCheck count not
         imex-opt
-        imex-runner
-        imex-runner-pps
         mlir-cpu-runner
         mlir_c_runner_utils
         mlir_runner_utils

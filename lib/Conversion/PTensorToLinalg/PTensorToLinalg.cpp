@@ -99,7 +99,7 @@ static auto initDTensor(mlir::Location &loc,
     // get shape as SmallVector<mlir::Value>
     // why can't we just use the existing tensor?
     lshp.resize(rank);
-    for (auto i : ::llvm::seq(0LU, rank)) {
+    for (auto i : ::llvm::seq<uint64_t>(0UL, rank)) {
       auto ia = rewriter.getIndexAttr(i);
       auto idx = rewriter.create<::mlir::arith::ConstantOp>(loc, ia);
       lshp[i] = rewriter.create<::mlir::tensor::ExtractOp>(
@@ -390,7 +390,7 @@ struct EWBinOpLowering
     auto rank = static_cast<unsigned>(shaped.getRank());
     llvm::SmallVector<mlir::Value> shp(rank);
     llvm::SmallVector<mlir::StringRef> iterators(rank);
-    for (auto i : llvm::seq(0u, rank)) {
+    for (auto i : llvm::seq<unsigned>(0U, rank)) {
       shp[i] = rewriter.create<::mlir::tensor::DimOp>(loc, lhs, i);
       // iterate in parallel
       iterators[i] = "parallel";
